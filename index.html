@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="7つの質問で、お客様が予約まで進みにくい場所をチェック。Instagram・DM・LINE・予約のつながりを見直す無料の自己診断です。">
+  <meta property="og:title" content="あなたのお客様はどこで消えている？ | yuuyamarketing">
+  <meta property="og:description" content="7つの質問で、予約につながる流れを見直そう。無料・登録不要の自己診断。">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f7f5ef">
+  <title>あなたのお客様はどこで消えている？ | yuuyamarketing</title>
+  <style>
+    :root { --paper: #f7f5ef; --ink: #182c33; --muted: #596b70; --line: #d6ded9; --accent: #b94727; --tint: #fbe9db; --green: #245648; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif; line-height: 1.7; }
+    button, input, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid #226f9d; outline-offset: 4px; }
+    [hidden] { display: none !important; }
+    .shell { width: min(100% - 40px, 1020px); margin: auto; }
+    .topbar { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); }
+    .wordmark { font-size: 16px; font-weight: 800; letter-spacing: -.5px; }
+    .wordmark::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 9px; border-radius: 50%; background: var(--accent); }
+    .language { display: flex; gap: 3px; }
+    .language button { border: 0; border-radius: 5px; color: var(--muted); background: transparent; padding: 7px 10px; font-size: 12px; min-height: 40px; }
+    .language button[aria-pressed="true"] { background: var(--ink); color: white; }
+    main { padding: 48px 0 56px; min-height: calc(100svh - 150px); }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 750; letter-spacing: 1px; margin: 0 0 20px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: 44px; line-height: 1.45; letter-spacing: -1.8px; margin-bottom: 22px; }
+    h1 em { font-style: normal; color: var(--accent); }
+    h2 { font-size: 27px; line-height: 1.6; letter-spacing: -.7px; }
+    h3 { font-size: 17px; }
+    .lede { color: var(--muted); font-size: 16px; line-height: 1.9; max-width: 530px; }
+    .landing { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
+    .primary { display: inline-flex; align-items: center; justify-content: center; gap: 16px; background: var(--ink); border: 1px solid var(--ink); color: white; border-radius: 9px; padding: 16px 24px; font-size: 15px; font-weight: 650; min-height: 54px; text-decoration: none; transition: transform 150ms, background 150ms; }
+    .primary:hover { background: #2a454d; transform: translateY(-1px); }
+    .primary:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+    .secondary { background: transparent; border: 1px solid var(--line); border-radius: 9px; min-height: 48px; padding: 12px 18px; color: var(--ink); font-size: 13px; }
+    .quiet { background: transparent; border: 0; padding: 12px 0; color: var(--muted); text-decoration: underline; text-underline-offset: 4px; font-size: 13px; min-height: 44px; }
+    .small { font-size: 12px; color: var(--muted); }
+    .landing .primary { margin-top: 12px; }
+    .fineprint { margin: 14px 0 0; font-size: 12px; color: var(--muted); }
+    .route-preview { padding: 26px 0 26px 30px; border-left: 1px solid var(--line); }
+    .route-preview > p { font-size: 12px; margin-bottom: 20px; color: var(--muted); }
+    .route-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; }
+    .route-row > span { width: 29px; height: 29px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; font-size: 10px; color: var(--muted); flex-shrink: 0; }
+    .route-row strong { font-size: 14px; font-weight: 600; }
+    .route-row.highlight > span { background: var(--tint); border-color: #dcb098; color: var(--accent); }
+    .route-row.highlight strong { color: var(--accent); }
+    .route-row i { font-style: normal; font-size: 10px; margin-left: auto; color: var(--accent); }
+    .promise { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 20px; color: var(--muted); font-size: 12px; }
+    .quiz-wrap { max-width: 650px; margin: 0 auto; }
+    .progress-head { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+    progress { display: block; width: 100%; height: 5px; border: 0; border-radius: 9px; overflow: hidden; background: #e0e5df; margin-bottom: 35px; accent-color: var(--accent); }
+    progress::-webkit-progress-bar { background: #e0e5df; }
+    progress::-webkit-progress-value { background: var(--accent); }
+    progress::-moz-progress-bar { background: var(--accent); }
+    .question-stage { font-size: 12px; color: var(--accent); font-weight: 650; margin-bottom: 10px; }
+    .question-help { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+    fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+    .option { display: flex; gap: 14px; align-items: flex-start; background: #fffefa; border: 1px solid var(--line); border-radius: 10px; padding: 17px 18px; margin-bottom: 10px; cursor: pointer; font-size: 14px; }
+    .option:has(input:checked) { border-color: var(--green); background: #edf3ed; box-shadow: inset 0 0 0 1px var(--green); }
+    .option input { accent-color: var(--green); width: 18px; height: 18px; margin: 3px 0 0; flex-shrink: 0; }
+    .option:has(input:focus-visible) { outline: 3px solid #226f9d; outline-offset: 3px; }
+    .option.skip { background: transparent; font-size: 12px; color: var(--muted); }
+    .quiz-actions { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 24px; }
+    .result { max-width: 760px; margin: auto; }
+    .result-head { padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+    .result-head h1 { font-size: 34px; margin-bottom: 16px; }
+    .result-head .eyebrow { margin-bottom: 14px; }
+    .result-explanation { color: var(--muted); font-size: 15px; margin-bottom: 0; }
+    .tie-note { background: var(--tint); color: #804127; padding: 12px 15px; border-radius: 7px; font-size: 12px; margin: 18px 0 0; }
+    .first-step { margin-top: 24px; display: flex; gap: 15px; align-items: baseline; }
+    .first-step > span { color: var(--accent); font-size: 11px; font-weight: 750; white-space: nowrap; }
+    .first-step p { font-size: 15px; margin-bottom: 0; }
+    .flow-section { padding: 30px 0; border-bottom: 1px solid var(--line); }
+    .flow-section h2 { font-size: 20px; margin-bottom: 8px; }
+    .flow-section > p { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+    .flow { display: grid; grid-template-columns: 1.2fr auto .8fr auto 1fr auto 1fr; align-items: center; gap: 8px; }
+    .flow-inputs { display: grid; gap: 8px; }
+    .flow-node { border: 1px solid #cbd6cf; border-radius: 8px; padding: 12px 8px; text-align: center; background: #fffefa; font-size: 12px; font-weight: 600; }
+    .flow-node.line { background: #e9f0e5; border-color: #b7cdb7; color: #245648; }
+    .arrow { color: #688071; font-size: 18px; text-align: center; }
+    .flow-caption { font-size: 11px; color: var(--muted); margin: 14px 0 0; }
+    .cta { padding: 28px 0; }
+    .cta h2 { font-size: 21px; margin-bottom: 10px; }
+    .cta > p { color: var(--muted); font-size: 14px; }
+    .cta .primary { width: 100%; background: var(--accent); border-color: var(--accent); }
+    .cta .primary:hover { background: #9d3b22; }
+    .message-label { display: block; font-size: 12px; margin: 20px 0 7px; }
+    textarea { display: block; width: 100%; resize: vertical; min-height: 96px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #fffefa; color: var(--ink); font-size: 13px; line-height: 1.7; }
+    .copy-actions { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+    .copy-actions .secondary { min-height: 40px; padding: 8px 14px; font-size: 12px; flex-shrink: 0; white-space: nowrap; }
+    #copy-status { font-size: 11px; color: var(--muted); }
+    details { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    summary { cursor: pointer; font-size: 13px; font-weight: 600; }
+    .checks { list-style: none; padding: 0; margin: 18px 0; }
+    .checks li { display: flex; justify-content: space-between; gap: 18px; padding: 9px 0; border-bottom: 1px solid #e3e7df; font-size: 12px; }
+    .checks strong { font-weight: 600; text-align: right; }
+    .checks .needs-work { color: var(--accent); }
+    .method { font-size: 11px; color: var(--muted); }
+    .restart { display: block; margin: 16px auto 0; }
+    footer { border-top: 1px solid var(--line); padding: 17px 0 22px; display: flex; justify-content: space-between; gap: 14px; font-size: 10px; color: var(--muted); }
+    .noscript { padding: 25px; background: var(--tint); }
+    @media (max-width: 720px) {
+      .shell { width: min(100% - 36px, 520px); }
+      .topbar { min-height: 72px; }
+      .wordmark { font-size: 14px; }
+      main { padding: 32px 0 36px; }
+      .landing { display: block; }
+      h1 { font-size: 32px; letter-spacing: -1px; }
+      h2 { font-size: 23px; }
+      .lede { font-size: 14px; }
+      .landing .primary { width: 100%; }
+      .route-preview { border-left: 0; border-top: 1px solid var(--line); padding: 22px 0 0; margin-top: 28px; }
+      .route-preview > p { margin-bottom: 10px; }
+      .route-row { padding: 7px 0; }
+      .route-row strong { font-size: 12px; }
+      .promise { margin-top: 24px; }
+      .result-head h1 { font-size: 27px; }
+      .first-step { display: block; }
+      .first-step > span { display: block; margin-bottom: 6px; }
+      .flow { grid-template-columns: 1fr; gap: 6px; }
+      .flow-inputs { grid-template-columns: 1fr 1fr; }
+      .arrow { transform: rotate(90deg); line-height: 1; }
+      .flow-node { padding: 10px 8px; }
+      .flow-section h2, .cta h2 { font-size: 18px; }
+      .quiz-actions .primary { padding: 14px 18px; }
+      footer { flex-direction: column; gap: 4px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .primary { transition: none; } .primary:hover { transform: none; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <span class="wordmark">yuuyamarketing</span>
+      <nav class="language" aria-label="Language / 言語">
+        <button type="button" data-language="ja" aria-pressed="true">日本語</button>
+        <button type="button" data-language="en" aria-pressed="false">English</button>
+      </nav>
+    </header>
+    <main id="app"></main>
+    <noscript><p class="noscript">この診断にはJavaScriptが必要です。Instagramの @yuuyamarketing に「診断」とDMしてください。 / Enable JavaScript to take the quiz, or DM “quiz” to @yuuyamarketing on Instagram.</p></noscript>
+    <footer><span id="footer-note"></span><span>© yuuyamarketing</span></footer>
+  </div>
+  <script>
+    const stages = [
+      {
+        name: ['プロフィール・広告 → DM', 'Profile / ad → DM'],
+        question: ['プロフィールや広告を見た人は、次に何をすればいいか分かりますか？', 'Do people know what to do after seeing your profile or ad?'],
+        help: ['「DMで〇〇と送ってね」など、次の一歩を案内していますか？', 'For example, do you tell them what to send you in a DM?'],
+        options: [['送る言葉と、送ると何が分かるかを書いている', 'I explain what to send and what they will get'], ['DMの案内はあるけど、内容はあいまい', 'I mention DMs, but the next step is vague'], ['DMしてもらう案内がない', 'I do not invite them to send a DM']],
+        explanation: ['興味を持った人が、次に何をすればいいか迷うかもしれません。DMで送る言葉と、送ると何が分かるかを一つにしぼって伝えましょう。', 'Interested people may not know what to do next. Give them one clear word to DM and explain what they will get.'],
+        action: ['「相談したい方は『相談』とDMしてください」と書いてみましょう。', 'Try: “DM me CONSULT if you would like to talk.”']
+      },
+      {
+        name: ['DM → 返信', 'DM → reply'],
+        question: ['相談のDMが来たら、いつ返していますか？', 'When someone sends an inquiry, when do you reply?'],
+        help: ['最近のふだんの対応に、一番近いものを選んでください。', 'Choose the answer closest to what you usually do.'],
+        options: [['その日のうちに返す。返せない時も一言伝える', 'That day, with a short update if I need more time'], ['翌日以降になることが多い', 'Often the next day or later'], ['見落としたり、返せないままになったりする', 'I sometimes miss messages or leave them unanswered']],
+        explanation: ['返信を待つ間に、相手が相談をやめてしまうかもしれません。すぐに答えられなくても、いつ返すかを一言伝えましょう。', 'Someone may lose interest while waiting for your reply. If you cannot answer yet, let them know when you will.'],
+        action: ['「ありがとうございます。明日までにお返事します」の一文を用意しましょう。', 'Prepare a short reply: “Thank you. I will get back to you by tomorrow.”']
+      },
+      {
+        name: ['DM → LINE', 'DM → LINE'],
+        question: ['DMからLINEに進んでもらう時、理由を伝えていますか？', 'When you invite someone from DMs to LINE, do you explain why?'],
+        help: ['LINEを使わないお店は、「使わない」を選んで大丈夫です。', 'If LINE is not part of your business, choose “Not applicable.”'],
+        options: [['LINEで何が分かるかと、登録リンクを一緒に伝える', 'I explain the benefit and include the add-friend link'], ['登録リンクだけを送っている', 'I send only the add-friend link'], ['LINEに進む案内が決まっていない', 'I have no clear invitation to LINE']],
+        explanation: ['LINEに移る理由が分からないと、相手はDMで止まるかもしれません。登録すると何を受け取れるかを、リンクと一緒に伝えましょう。', 'People may stay in DMs if they do not see a reason to move to LINE. Explain what they will receive alongside the link.'],
+        action: ['「LINEでは相談の流れと予約方法をご案内します」と添えてみましょう。', 'Try adding: “On LINE, I will explain the consultation and how to book.”']
+      },
+      {
+        name: ['LINE → その後の連絡', 'LINE → follow-up'],
+        question: ['LINEに登録した人へ、その後も案内していますか？', 'After someone adds your LINE, do you follow up?'],
+        help: ['登録したまま、何も届かない人はいませんか？', 'Does anyone add you and then hear nothing more?'],
+        options: [['最初の案内と、その後に送る内容を決めている', 'I have a welcome message and a follow-up plan'], ['最初のあいさつだけを送る', 'I send only a welcome message'], ['気づいた時だけ送る、または何も送らない', 'I send messages only when I remember, or not at all']],
+        explanation: ['登録後の案内がないと、相手は相談の進め方が分からないままかもしれません。役立つ情報と次の一歩を、無理のないペースで伝えましょう。', 'Without follow-up, people may not know how to move toward a consultation. Share useful information and a clear next step at a reasonable pace.'],
+        action: ['最初のあいさつに、相談できる内容と予約方法を入れましょう。', 'Include what you can help with and how to book in your welcome message.']
+      },
+      {
+        name: ['LINE → 予約', 'LINE → booking'],
+        question: ['LINEを見た人は、迷わず予約できますか？', 'Can someone on LINE book without getting confused?'],
+        help: ['予約する場所と、予約後の流れを案内していますか？', 'Do you explain where to book and what happens next?'],
+        options: [['予約方法・相談内容・予約後の流れが分かる', 'The booking method, consultation and next steps are clear'], ['予約方法はあるけど、少し探す必要がある', 'They can book, but they have to look for the details'], ['予約方法が分かりにくい、または決まっていない', 'Booking is unclear or there is no set method']],
+        explanation: ['予約したくても、方法が分からないと途中で止まるかもしれません。予約する場所と、相談で何をするかをまとめて伝えましょう。', 'People may stop even if they want to book when the booking method is unclear. Put the booking link and consultation details together.'],
+        action: ['予約方法を一つにまとめて、LINEからすぐ見つかる場所に置きましょう。', 'Use one booking method and make it easy to find from LINE.']
+      },
+      {
+        name: ['予約 → 来店・参加', 'Booking → attendance'],
+        question: ['予約した人に、日時や参加方法をもう一度伝えていますか？', 'Do you remind booked customers of the time and how to attend?'],
+        help: ['来店でもオンライン相談でも、同じように考えてください。', 'This applies to visits and online consultations.'],
+        options: [['予約確認と事前の案内を送り、変更方法も伝える', 'I send confirmation, a reminder and rescheduling details'], ['予約した時の確認だけを送る', 'I send a confirmation only when they book'], ['確認や事前の案内を送っていない', 'I send no confirmation or reminder']],
+        explanation: ['日時や参加方法があいまいだと、予約した人も来られないかもしれません。事前に必要な情報と、変更したい時の連絡方法を伝えましょう。', 'Booked customers may miss the appointment if the details are unclear. Send the essentials beforehand and explain how to reschedule.'],
+        action: ['前日までに、日時・場所やURL・変更方法を一つのメッセージで送りましょう。', 'Before the appointment, send the time, location or link, and rescheduling method together.']
+      },
+      {
+        name: ['購入 → その後の連絡', 'Purchase → follow-up'],
+        question: ['買ってくれた人に、その後も連絡していますか？', 'Do you follow up after someone buys from you?'],
+        help: ['お礼や、困っていることがないかの確認も含みます。', 'This can include a thank-you or checking whether they need help.'],
+        options: [['お礼を伝え、使い方や困りごとも確認する', 'I thank them and check whether they need help'], ['お礼だけを伝える', 'I send a thank-you only'], ['購入後はほとんど連絡しない', 'I rarely contact them after the purchase']],
+        explanation: ['買った後に連絡がないと、困りごとや次の相談に気づけないかもしれません。お礼と「困っていることはありませんか？」の一言から始めましょう。', 'Without follow-up, you may miss questions or a chance to help again. Start with a thank-you and a simple “Is there anything you need help with?”'],
+        action: ['購入後に送る、お礼と確認の短いメッセージを用意しましょう。', 'Prepare a short thank-you and check-in message for after a purchase.']
+      }
+    ];
+    const copy = {
+      ja: {
+        title: 'あなたのお客様はどこで消えている？ | yuuyamarketing', eyebrow: '無料の予約導線チェック · 7つの質問',
+        hero: 'あなたのお客様は<br><em>どこで消えている？</em>',
+        intro: '「興味はありそうなのに、予約につながらない。」<br>その理由を、7つの質問で一緒に見つけましょう。',
+        start: '無料でチェックする', startNote: '登録不要。名前や連絡先の入力もありません。',
+        routeTitle: 'お客様の「次の一歩」をチェック', routeHint: 'ここで止まる？',
+        promise: '責めるための診断ではありません。まず一つ、見直す場所を決めるためのチェックです。',
+        footer: '回答はこのページ内だけで計算。保存・送信しません。',
+        progress: '質問', choose: '今の状況に一番近いものを、一つ選んでください。',
+        skip: 'この流れは使わない・まだ分からない', back: '戻る', next: '次へ', finish: '結果を見る',
+        resultLabel: 'あなたの回答から見つけた、見直しポイント', resultTitle: 'まず見直したいのは',
+        healthyTitle: '大きな見直しポイントは見つかりませんでした',
+        healthyText: '回答した項目では、次の一歩を案内できているようです。実際のDM数・予約数・参加数も確認して、流れがつながっているか見てみましょう。',
+        unknownTitle: 'まずは今の流れを、一つずつ確認しましょう',
+        unknownText: '今回はすべて「使わない・分からない」だったため、優先順位は出せません。最近のお客様が、どこから来て、どう予約したかを一件たどってみましょう。',
+        first: 'まず、これだけ', healthyAction: '最近の相談を一件選び、DMから予約・参加までの流れを確認しましょう。',
+        unknownAction: '使っている流れが分かったら、もう一度チェックしてみましょう。',
+        tie: '同じ優先度の項目もあります：', tieEnd: '。今回は、お客様の流れで先にある項目を表示しています。',
+        skipped: '「使わない・分からない」の項目は、判定から外しています。',
+        flowTitle: '参考：KNCT Universityの流れ',
+        flowIntro: '入口が違っても、LINEから先は一つの予約・販売の流れにつなげています。',
+        profile: 'プロフィールA', application: '申込みページ', line: 'LINE', booking: '予約・相談', sale: 'ご案内・販売',
+        flowCaption: '流れを簡単にした図です。売上や予約の増加を示すものではありません。',
+        ctaTitle: 'あなたのお店なら、どうつなぐ？',
+        ctaText: 'DM・LINE・その後の連絡をつなぐ仕組みについて、yuuyamarketingに相談できます。Instagramで「診断」と、結果を送ってください。',
+        cta: 'Instagramを開いてDMする ↗',
+        ctaNote: '@yuuyamarketing のプロフィールが開きます。DMは自分で送信してください。',
+        messageLabel: 'DMに貼り付ける文', message: '診断を受けました。「{stage}」を見直したいです。私のお店の場合、どうつなげればよいか相談したいです。',
+        healthyMessage: '診断を受けました。DM・LINE・予約の流れを、お店に合わせて見直したいです。',
+        unknownMessage: '診断を受けました。今のお店のDM・LINE・予約の流れを整理したいです。',
+        copy: '文をコピー', copied: 'コピーしました。InstagramのDMに貼り付けてください。',
+        copyFallback: '文を選択しました。長押し、またはコピー操作でコピーしてください。',
+        details: '7つの回答と、結果の見方', statuses: ['案内できている', '少し見直したい', '優先して見直したい', '判定しない'],
+        method: 'これは自己診断です。実際にお客様が離れた場所や、売上・予約への影響を測った結果ではありません。回答を0〜2点の見直し優先度として比べ、最も高い項目を表示します。同点なら流れの早い順。未使用・不明は除外し、すべて0点なら大きな見直しポイントなしと表示します。',
+        restart: 'もう一度チェックする',
+      },
+      en: {
+        title: 'Where are your customers dropping off? | yuuyamarketing', eyebrow: 'FREE BOOKING FLOW CHECK · 7 QUESTIONS',
+        hero: 'Interested customers.<br><em>Where do they disappear?</em>',
+        intro: 'They seem interested, but never book.<br>Use seven simple questions to find a place to improve.',
+        start: 'Check my flow', startNote: 'No signup. No name or contact details required.',
+        routeTitle: 'Check your customer’s next step', routeHint: 'A stopping point?',
+        promise: 'No blame, no judgment. Just one clear place to start improving your customer’s next step.',
+        footer: 'Answers stay on this page. They are not saved or sent.',
+        progress: 'Question', choose: 'Choose the one answer closest to what you do today.',
+        skip: 'Not applicable / I am not sure yet', back: 'Back', next: 'Next', finish: 'See my result',
+        resultLabel: 'A place to improve, based on your answers', resultTitle: 'Start by reviewing',
+        healthyTitle: 'No major improvement point stood out',
+        healthyText: 'Your answers suggest that you guide customers through the steps you use. Check real inquiry, booking and attendance numbers to see whether those steps connect in practice.',
+        unknownTitle: 'Start by mapping your current flow',
+        unknownText: 'Every answer was not applicable or unknown, so we cannot rank a priority. Trace one recent customer from their first contact to their booking.',
+        first: 'ONE FIRST STEP', healthyAction: 'Trace one recent inquiry from the first DM through booking and attendance.',
+        unknownAction: 'Once you know which steps you use, take the check again.',
+        tie: 'Other steps have the same priority: ', tieEnd: '. We show the earliest one in the customer journey first.',
+        skipped: 'Not applicable / unknown answers are excluded from the result.',
+        flowTitle: 'An example: KNCT University’s flow',
+        flowIntro: 'Two entry paths join at LINE, then share one booking and sales process.',
+        profile: 'Profile A', application: 'Application funnel', line: 'LINE', booking: 'Booking / consultation', sale: 'Offer / sale',
+        flowCaption: 'A simplified flow illustration, not evidence of revenue or booking increases.',
+        ctaTitle: 'How could this work for your business?',
+        ctaText: 'Talk to yuuyamarketing about connecting your DMs, LINE and follow-up. Send “quiz” and your result on Instagram.',
+        cta: 'Open Instagram to send a DM ↗',
+        ctaNote: 'Opens @yuuyamarketing’s profile. You send the DM yourself.',
+        messageLabel: 'A message to paste into your DM',
+        message: 'I took the quiz. I want to improve “{stage}”. Can we discuss how to connect the flow for my business?',
+        healthyMessage: 'I took the quiz. I would like to review my business’s DM, LINE and booking flow.',
+        unknownMessage: 'I took the quiz. I would like help mapping my business’s DM, LINE and booking flow.',
+        copy: 'Copy message', copied: 'Copied. Paste it into your Instagram DM.',
+        copyFallback: 'Message selected. Long-press or use your copy command to copy it.',
+        details: 'Your 7 answers and how the result works', statuses: ['Clear next step', 'Some room to improve', 'Review first', 'Not assessed'],
+        method: 'This is a self-check, not a measurement of customer drop-off or revenue and booking impact. Answers are assigned an improvement priority from 0 to 2. The highest priority is shown first; ties follow journey order. Unknown or unused steps are excluded. If every assessed step scores 0, no major improvement point is shown.',
+        restart: 'Take the check again',
+      }
+    };
+    const app = document.getElementById('app');
+    let language = 'ja';
+    let screen = 'landing';
+    let questionIndex = 0;
+    let answers = Array(7).fill(undefined);
+    const text = pair => pair[language === 'ja' ? 0 : 1];
+    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+
+    function calculateResult(values) {
+      const assessed = values.map((score, index) => ({ score, index })).filter(item => Number.isInteger(item.score) && item.score >= 0 && item.score <= 2);
+      if (assessed.length === 0) return { type: 'unknown', indices: [] };
+      const highest = Math.max(...assessed.map(item => item.score));
+      if (highest === 0) return { type: 'healthy', indices: [] };
+      return { type: 'priority', indices: assessed.filter(item => item.score === highest).map(item => item.index) };
+    }
+
+    function render(focus = true) {
+      const labels = copy[language];
+      document.documentElement.lang = language;
+      document.title = labels.title;
+      document.getElementById('footer-note').textContent = labels.footer;
+      document.querySelectorAll('[data-language]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.language === language)));
+      if (screen === 'landing') renderLanding(labels);
+      if (screen === 'question') renderQuestion(labels);
+      if (screen === 'result') renderResult(labels);
+      if (focus) {
+        app.querySelector('h1, h2')?.focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+    }
+
+    function renderLanding(labels) {
+      app.innerHTML = `<div class="landing"><section><p class="eyebrow">${labels.eyebrow}</p><h1 tabindex="-1">${labels.hero}</h1><p class="lede">${labels.intro}</p><button class="primary" type="button" data-action="start">${labels.start}<span aria-hidden="true">→</span></button><p class="fineprint">${labels.startNote}</p></section><aside class="route-preview" aria-label="${labels.routeTitle}"><p>${labels.routeTitle}</p>${stages.map((stage, index) => `<div class="route-row ${index === 4 ? 'highlight' : ''}"><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(text(stage.name))}</strong>${index === 4 ? `<i>${labels.routeHint}</i>` : ''}</div>`).join('')}</aside></div><p class="promise">${labels.promise}</p>`;
+    }
+
+    function renderQuestion(labels) {
+      const stage = stages[questionIndex];
+      app.innerHTML = `<section class="quiz-wrap"><div class="progress-head"><span>${labels.progress} ${questionIndex + 1} / 7</span><span>${escapeHtml(text(stage.name))}</span></div><progress value="${questionIndex + 1}" max="7" aria-label="${labels.progress} ${questionIndex + 1} / 7"></progress><p class="question-stage">${String(questionIndex + 1).padStart(2, '0')} / ${escapeHtml(text(stage.name))}</p><h2 id="question-title" tabindex="-1">${escapeHtml(text(stage.question))}</h2><p class="question-help" id="question-help">${escapeHtml(text(stage.help))}</p><form id="question-form"><fieldset aria-labelledby="question-title" aria-describedby="question-help"><legend class="sr-only">${labels.choose}</legend>${stage.options.map((option, index) => `<label class="option"><input type="radio" name="answer" value="${index}" ${answers[questionIndex] === index ? 'checked' : ''} required><span>${escapeHtml(text(option))}</span></label>`).join('')}<label class="option skip"><input type="radio" name="answer" value="skip" ${answers[questionIndex] === null ? 'checked' : ''} required><span>${labels.skip}</span></label></fieldset><div class="quiz-actions"><button type="button" class="quiet" data-action="back">← ${labels.back}</button><button type="submit" class="primary" ${answers[questionIndex] === undefined ? 'disabled' : ''}>${questionIndex === 6 ? labels.finish : labels.next} <span aria-hidden="true">→</span></button></div></form></section>`;
+    }
+
+    function renderResult(labels) {
+      const result = calculateResult(answers);
+      const stage = result.type === 'priority' ? stages[result.indices[0]] : null;
+      const headline = stage ? `${labels.resultTitle}<br><em>${escapeHtml(text(stage.name))}</em>` : result.type === 'healthy' ? labels.healthyTitle : labels.unknownTitle;
+      const explanation = stage ? text(stage.explanation) : result.type === 'healthy' ? labels.healthyText : labels.unknownText;
+      const action = stage ? text(stage.action) : result.type === 'healthy' ? labels.healthyAction : labels.unknownAction;
+      const message = stage ? labels.message.replace('{stage}', text(stage.name)) : result.type === 'healthy' ? labels.healthyMessage : labels.unknownMessage;
+      const ties = result.indices.slice(1).map(index => text(stages[index].name)).join(language === 'ja' ? '、' : ', ');
+      app.innerHTML = `<section class="result"><div class="result-head"><p class="eyebrow">${labels.resultLabel}</p><h1 tabindex="-1">${headline}</h1><p class="result-explanation">${escapeHtml(explanation)}</p>${ties ? `<p class="tie-note">${labels.tie}${escapeHtml(ties)}${labels.tieEnd}</p>` : ''}${answers.includes(null) ? `<p class="fineprint">${labels.skipped}</p>` : ''}<div class="first-step"><span>${labels.first}</span><p>${escapeHtml(action)}</p></div></div><section class="flow-section" aria-labelledby="flow-title"><h2 id="flow-title">${labels.flowTitle}</h2><p>${labels.flowIntro}</p><div class="flow" role="img" aria-label="${escapeHtml(`${labels.profile} / ${labels.application} → ${labels.line} → ${labels.booking} → ${labels.sale}`)}"><div class="flow-inputs"><div class="flow-node">${labels.profile}</div><div class="flow-node">${labels.application}</div></div><span class="arrow" aria-hidden="true">→</span><div class="flow-node line">${labels.line}</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">${labels.booking}</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">${labels.sale}</div></div><p class="flow-caption">${labels.flowCaption}</p></section><section class="cta" aria-labelledby="cta-title"><h2 id="cta-title">${labels.ctaTitle}</h2><p>${labels.ctaText}</p><a class="primary" href="https://www.instagram.com/yuuyamarketing/" target="_blank" rel="noopener noreferrer">${labels.cta}</a><p class="fineprint">${labels.ctaNote}</p><label for="dm-message" class="message-label">${labels.messageLabel}</label><textarea id="dm-message" readonly>${escapeHtml(message)}</textarea><div class="copy-actions"><button type="button" class="secondary" data-action="copy">${labels.copy}</button><span id="copy-status" role="status"></span></div></section><details><summary>${labels.details}</summary><ul class="checks">${stages.map((item, index) => `<li><span>${escapeHtml(text(item.name))}</span><strong class="${answers[index] === 2 ? 'needs-work' : ''}">${labels.statuses[answers[index] === null || answers[index] === undefined ? 3 : answers[index]]}</strong></li>`).join('')}</ul><p class="method">${labels.method}</p></details><button type="button" class="quiet restart" data-action="restart">${labels.restart}</button></section>`;
+    }
+
+    document.querySelector('.language').addEventListener('click', event => {
+      const button = event.target.closest('[data-language]');
+      if (!button) return;
+      language = button.dataset.language;
+      render();
+    });
+    app.addEventListener('change', event => {
+      if (event.target.name !== 'answer') return;
+      answers[questionIndex] = event.target.value === 'skip' ? null : Number(event.target.value);
+      app.querySelector('[type="submit"]').disabled = false;
+    });
+    app.addEventListener('submit', event => {
+      event.preventDefault();
+      if (answers[questionIndex] === undefined) return;
+      if (questionIndex < 6) questionIndex += 1;
+      else screen = 'result';
+      render();
+    });
+    app.addEventListener('click', async event => {
+      const button = event.target.closest('[data-action]');
+      if (!button) return;
+      const action = button.dataset.action;
+      if (action === 'start' || action === 'restart') {
+        answers = Array(7).fill(undefined);
+        questionIndex = 0;
+        screen = 'question';
+      } else if (action === 'back') {
+        if (questionIndex > 0) questionIndex -= 1;
+        else screen = 'landing';
+      } else if (action === 'copy') {
+        const field = document.getElementById('dm-message');
+        try {
+          await navigator.clipboard.writeText(field.value);
+          document.getElementById('copy-status').textContent = copy[language].copied;
+        } catch {
+          field.focus();
+          field.select();
+          field.setSelectionRange(0, field.value.length);
+          document.getElementById('copy-status').textContent = copy[language].copyFallback;
+        }
+        return;
+      }
+      render();
+    });
+    render(false);
+  </script>
+</body>
+</html>
