@@ -85,6 +85,9 @@
     .flow-inputs { display: grid; gap: 8px; }
     .flow-node { border: 1px solid #cbd6cf; border-radius: 8px; padding: 12px 8px; text-align: center; background: #fffefa; font-size: 12px; font-weight: 600; }
     .flow-node.line { background: #e9f0e5; border-color: #b7cdb7; color: #245648; }
+    .repair-label { font-size: 11px; color: var(--muted); margin: 22px 0 10px; }
+    .repair { display: grid; grid-template-columns: 1fr auto 1.3fr auto 1fr; align-items: center; gap: 8px; }
+    .repair .fix { border-color: #d8ae95; background: var(--tint); color: #884029; }
     .arrow { color: #688071; font-size: 18px; text-align: center; }
     .flow-caption { font-size: 11px; color: var(--muted); margin: 14px 0 0; }
     .cta { padding: 28px 0; }
@@ -129,6 +132,7 @@
       .flow-inputs { grid-template-columns: 1fr 1fr; }
       .arrow { transform: rotate(90deg); line-height: 1; }
       .flow-node { padding: 10px 8px; }
+      .repair { grid-template-columns: 1fr; gap: 6px; }
       .flow-section h2, .cta h2 { font-size: 18px; }
       .quiz-actions .primary { padding: 14px 18px; }
       footer { flex-direction: column; gap: 4px; }
@@ -284,6 +288,15 @@
       }
     };
     const app = document.getElementById('app');
+    const repairs = [
+      ['送る言葉を一つに', 'One clear word to send'],
+      ['返信予定を伝える', 'Say when you will reply'],
+      ['登録する理由も伝える', 'Explain why to add LINE'],
+      ['次の一歩を案内する', 'Explain the next step'],
+      ['予約方法を一つに', 'One clear way to book'],
+      ['日時と参加方法を確認', 'Confirm time and attendance details'],
+      ['お礼と困りごとを確認', 'Thank them and check in'],
+    ];
     let language = 'ja';
     let screen = 'landing';
     let questionIndex = 0;
@@ -331,7 +344,10 @@
       const action = stage ? text(stage.action) : result.type === 'healthy' ? labels.healthyAction : labels.unknownAction;
       const message = stage ? labels.message.replace('{stage}', text(stage.name)) : result.type === 'healthy' ? labels.healthyMessage : labels.unknownMessage;
       const ties = result.indices.slice(1).map(index => text(stages[index].name)).join(language === 'ja' ? '、' : ', ');
-      app.innerHTML = `<section class="result"><div class="result-head"><p class="eyebrow">${labels.resultLabel}</p><h1 tabindex="-1">${headline}</h1><p class="result-explanation">${escapeHtml(explanation)}</p>${ties ? `<p class="tie-note">${labels.tie}${escapeHtml(ties)}${labels.tieEnd}</p>` : ''}${answers.includes(null) ? `<p class="fineprint">${labels.skipped}</p>` : ''}<div class="first-step"><span>${labels.first}</span><p>${escapeHtml(action)}</p></div></div><section class="flow-section" aria-labelledby="flow-title"><h2 id="flow-title">${labels.flowTitle}</h2><p>${labels.flowIntro}</p><div class="flow" role="img" aria-label="${escapeHtml(`${labels.profile} / ${labels.application} → ${labels.line} → ${labels.booking} → ${labels.sale}`)}"><div class="flow-inputs"><div class="flow-node">${labels.profile}</div><div class="flow-node">${labels.application}</div></div><span class="arrow" aria-hidden="true">→</span><div class="flow-node line">${labels.line}</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">${labels.booking}</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">${labels.sale}</div></div><p class="flow-caption">${labels.flowCaption}</p></section><section class="cta" aria-labelledby="cta-title"><h2 id="cta-title">${labels.ctaTitle}</h2><p>${labels.ctaText}</p><a class="primary" href="https://www.instagram.com/yuuyamarketing/" target="_blank" rel="noopener noreferrer">${labels.cta}</a><p class="fineprint">${labels.ctaNote}</p><label for="dm-message" class="message-label">${labels.messageLabel}</label><textarea id="dm-message" readonly>${escapeHtml(message)}</textarea><div class="copy-actions"><button type="button" class="secondary" data-action="copy">${labels.copy}</button><span id="copy-status" role="status"></span></div></section><details><summary>${labels.details}</summary><ul class="checks">${stages.map((item, index) => `<li><span>${escapeHtml(text(item.name))}</span><strong class="${answers[index] === 2 ? 'needs-work' : ''}">${labels.statuses[answers[index] === null || answers[index] === undefined ? 3 : answers[index]]}</strong></li>`).join('')}</ul><p class="method">${labels.method}</p></details><button type="button" class="quiet restart" data-action="restart">${labels.restart}</button></section>`;
+      const repairSteps = stage ? text(stage.name).split(' → ') : [];
+      const repairTitle = language === 'ja' ? '改善のイメージ（提案）' : 'A suggested way to connect this step';
+      const repairDiagram = stage ? `<p class="repair-label">${repairTitle}</p><div class="repair" role="img" aria-label="${escapeHtml(`${repairSteps[0]} → ${text(repairs[result.indices[0]])} → ${repairSteps[1]}`)}"><div class="flow-node">${escapeHtml(repairSteps[0])}</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node fix">${escapeHtml(text(repairs[result.indices[0]]))}</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">${escapeHtml(repairSteps[1])}</div></div>` : '';
+      app.innerHTML = `<section class="result"><div class="result-head"><p class="eyebrow">${labels.resultLabel}</p><h1 tabindex="-1">${headline}</h1><p class="result-explanation">${escapeHtml(explanation)}</p>${ties ? `<p class="tie-note">${labels.tie}${escapeHtml(ties)}${labels.tieEnd}</p>` : ''}${answers.includes(null) ? `<p class="fineprint">${labels.skipped}</p>` : ''}<div class="first-step"><span>${labels.first}</span><p>${escapeHtml(action)}</p></div>${repairDiagram}</div><section class="flow-section" aria-labelledby="flow-title"><h2 id="flow-title">${labels.flowTitle}</h2><p>${labels.flowIntro}</p><div class="flow" role="img" aria-label="${escapeHtml(`${labels.profile} / ${labels.application} → ${labels.line} → ${labels.booking} → ${labels.sale}`)}"><div class="flow-inputs"><div class="flow-node">${labels.profile}</div><div class="flow-node">${labels.application}</div></div><span class="arrow" aria-hidden="true">→</span><div class="flow-node line">${labels.line}</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">${labels.booking}</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">${labels.sale}</div></div><p class="flow-caption">${labels.flowCaption}</p></section><section class="cta" aria-labelledby="cta-title"><h2 id="cta-title">${labels.ctaTitle}</h2><p>${labels.ctaText}</p><a class="primary" href="https://www.instagram.com/yuuyamarketing/" target="_blank" rel="noopener noreferrer">${labels.cta}</a><p class="fineprint">${labels.ctaNote}</p><label for="dm-message" class="message-label">${labels.messageLabel}</label><textarea id="dm-message" readonly>${escapeHtml(message)}</textarea><div class="copy-actions"><button type="button" class="secondary" data-action="copy">${labels.copy}</button><span id="copy-status" role="status"></span></div></section><details><summary>${labels.details}</summary><ul class="checks">${stages.map((item, index) => `<li><span>${escapeHtml(text(item.name))}</span><strong class="${answers[index] === 2 ? 'needs-work' : ''}">${labels.statuses[answers[index] === null || answers[index] === undefined ? 3 : answers[index]]}</strong></li>`).join('')}</ul><p class="method">${labels.method}</p></details><button type="button" class="quiet restart" data-action="restart">${labels.restart}</button></section>`;
     }
 
     document.querySelector('.language').addEventListener('click', event => {
